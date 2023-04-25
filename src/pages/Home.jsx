@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import ClickFunctions from '../services/ClickFunctions';
 import ChangeFuntions from '../services/ChangeFuntions';
 import Categories from '../components/Categories';
+import ProductPreview from '../components/ProductPreview';
+import Loading from '../components/Loading';
 
 class Home extends React.Component {
   state = {
     searchInput: '',
+    resultSearch: '',
+    loading: false,
   };
 
   changeIptSearch = ChangeFuntions.changeIptSearch.bind(this);
@@ -14,18 +18,16 @@ class Home extends React.Component {
   clickBtnSearch = ClickFunctions.clickBtnSearch.bind(this);
 
   render() {
-    const { searchInput } = this.state;
+    const { searchInput, resultSearch, loading } = this.state;
     return (
       <section>
         <input
-          data-testid="query-input"
           type="text"
           value={ searchInput }
           placeholder="O Que Você Deseja Hoje?"
           onChange={ this.changeIptSearch }
         />
         <button
-          data-testid="query-button"
           name={ `q=${searchInput}` }
           type="button"
           onClick={ this.clickBtnSearch }
@@ -34,12 +36,24 @@ class Home extends React.Component {
         </button>
         <div>
           <Categories onClick={ this.clickBtnSearch } />
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
           <button>
-            <Link to="/shoppingcart" data-testid="shopping-cart-button">Carrinho</Link>
+            <Link to="/shoppingcart">Carrinho</Link>
           </button>
+        </div>
+        <div>
+          {loading ? <Loading /> : (
+            resultSearch !== '' && (
+              resultSearch.length === 0
+                ? (<p>Nenhum produto foi encontrado</p>)
+                : (resultSearch.map((result) => (
+                  <ProductPreview
+                    clickBtnAddToCart={ this.clickBtnAddToCart }
+                    product={ result }
+                    key={ result.id }
+                  />
+                )))
+            )
+          )}
         </div>
       </section>
     );
