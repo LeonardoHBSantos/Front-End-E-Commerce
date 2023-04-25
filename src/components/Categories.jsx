@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getCategories } from '../services/RequestFunctions';
 import Loading from './Loading';
+import { updateCategories } from '../services/DidMountFunctions';
 
 class Categories extends React.Component {
   state = {
@@ -9,17 +9,11 @@ class Categories extends React.Component {
     loading: true,
   };
 
-  componentDidMount() {
-    this.populateCategories();
-  }
+  updateCategories = updateCategories.bind(this);
 
-  populateCategories = async () => {
-    const categories = await getCategories();
-    this.setState({
-      categories,
-      loading: false,
-    });
-  };
+  componentDidMount() {
+    this.updateCategories();
+  }
 
   render() {
     const { categories, loading } = this.state;
@@ -31,7 +25,6 @@ class Categories extends React.Component {
             <button
               name={ `category=${id}` }
               key={ id }
-              data-testid="category"
               onClick={ onClick }
             >
               {name}

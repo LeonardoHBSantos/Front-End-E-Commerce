@@ -1,24 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ClickFunctions from '../services/ClickFunctions';
-import ChangeFuntions from '../services/ChangeFuntions';
-import Categories from '../components/Categories';
 import ProductPreview from '../components/ProductPreview';
-import Loading from '../components/Loading';
+import Categories from '../components/Categories';
+import { changeIptSearch } from '../services/ChangeFuntions';
+import { clickBtnSearch, clickBtnAddToCart } from '../services/ClickFunctions';
 
 class Home extends React.Component {
   state = {
     searchInput: '',
     resultSearch: '',
-    loading: false,
   };
 
-  changeIptSearch = ChangeFuntions.changeIptSearch.bind(this);
+  changeIptSearch = changeIptSearch.bind(this);
 
-  clickBtnSearch = ClickFunctions.clickBtnSearch.bind(this);
+  clickBtnSearch = clickBtnSearch.bind(this);
+
+  clickBtnAddToCart = clickBtnAddToCart.bind(this);
 
   render() {
-    const { searchInput, resultSearch, loading } = this.state;
+    const { searchInput, resultSearch, cartSize } = this.state;
     return (
       <section>
         <input
@@ -39,20 +39,19 @@ class Home extends React.Component {
           <button>
             <Link to="/shoppingcart">Carrinho</Link>
           </button>
+          <span>{cartSize}</span>
         </div>
         <div>
-          {loading ? <Loading /> : (
-            resultSearch !== '' && (
-              resultSearch.length === 0
-                ? (<p>Nenhum produto foi encontrado</p>)
-                : (resultSearch.map((result) => (
-                  <ProductPreview
-                    clickBtnAddToCart={ this.clickBtnAddToCart }
-                    product={ result }
-                    key={ result.id }
-                  />
-                )))
-            )
+          {resultSearch !== '' && (
+            resultSearch.length === 0
+              ? (<p>Nenhum produto foi encontrado</p>)
+              : (resultSearch.map((result) => (
+                <ProductPreview
+                  clickBtnAddToCart={ this.clickBtnAddToCart }
+                  product={ result }
+                  key={ result.id }
+                />
+              )))
           )}
         </div>
       </section>

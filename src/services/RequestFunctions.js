@@ -12,6 +12,9 @@ export async function getProductsFromCategoryAndQuery(input) {
   return data;
 }
 
-export async function getProductById() {
-  // Requisição Produto pelo ID
+export async function getProductById(id) {
+  const endpoint = `/api/items/${id}`;
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  return data;
 }
