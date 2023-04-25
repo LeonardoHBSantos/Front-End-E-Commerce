@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductPreview from '../components/ProductPreview';
 import Categories from '../components/Categories';
-import { changeIptSearch } from '../services/ChangeFuntions';
+import { changeInputs } from '../services/ChangeFuntions';
 import { clickBtnSearch, clickBtnAddToCart } from '../services/ClickFunctions';
 import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
 import Loading from '../components/Loading';
@@ -14,7 +14,7 @@ class Home extends React.Component {
     loading: false,
   };
 
-  changeIptSearch = changeIptSearch.bind(this);
+  changeIptSearch = changeInputs.bind(this);
 
   clickBtnSearch = clickBtnSearch.bind(this);
 
@@ -31,11 +31,12 @@ class Home extends React.Component {
         <input
           type="text"
           value={ searchInput }
+          name="searchInput"
           placeholder="O Que Você Deseja Hoje?"
           onChange={ this.changeIptSearch }
         />
         <button
-          name={ `q=${searchInput}` }
+          value={ `q=${searchInput}` }
           type="button"
           onClick={ this.clickBtnSearch }
         >

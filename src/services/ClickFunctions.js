@@ -1,11 +1,11 @@
 import { getProductsFromCategoryAndQuery } from './RequestFunctions';
 import { updateSizeCart } from './UpdateSizeCartFuntion';
 
-export async function clickBtnSearch({ target: { name } }) {
+export async function clickBtnSearch({ target: { value } }) {
   this.setState({
     loading: true,
   });
-  const { results } = await getProductsFromCategoryAndQuery(name);
+  const { results } = await getProductsFromCategoryAndQuery(value);
   this.setState({
     resultSearch: [...results],
     loading: false,
@@ -72,5 +72,19 @@ export async function clickBtnSubmitAvaliation(event) {
     localStorage.setItem(id, ratingString);
     this.setState({ text: '', email: '', rating: '' });
     this.setState({ invalid: false });
+  }
+}
+
+export function clickBtnSubmitCheckout(event) {
+  event.preventDefault();
+  const { name,
+    cpf,
+    email, customerPhone, customerCep, customerAddress, paymentMethod } = this.state;
+  if (!name
+    || !cpf
+    || !email || !customerPhone || !customerCep || !customerAddress || !paymentMethod) {
+    this.setState({ error: true });
+  } else {
+    this.history.push('/');
   }
 }

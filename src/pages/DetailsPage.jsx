@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { clickBtnAddToCart, clickBtnSubmitAvaliation } from '../services/ClickFunctions';
 import { getProductObj } from '../services/DidMountFunctions';
 import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
-import { changeIptsFormAvaliation } from '../services/ChangeFuntions';
+import { changeInputs } from '../services/ChangeFuntions';
 
 class DetailsPage extends Component {
   state = {
@@ -20,7 +20,7 @@ class DetailsPage extends Component {
 
   clickBtnSubmitAvaliation = clickBtnSubmitAvaliation.bind(this);
 
-  changeIptsFormAvaliation = changeIptsFormAvaliation.bind(this);
+  changeIptsFormAvaliation = changeInputs.bind(this);
 
   componentDidMount() {
     this.getProductObj();
