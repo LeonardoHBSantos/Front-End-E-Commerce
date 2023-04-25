@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 class ProductPreview extends Component {
   render() {
     const {
+      product,
       product: {
         thumbnail,
         title,
@@ -12,6 +13,7 @@ class ProductPreview extends Component {
         id,
         shipping,
       },
+      clickBtnAddToCart,
     } = this.props;
     return (
       <div>
@@ -23,12 +25,18 @@ class ProductPreview extends Component {
           <p>{title}</p>
           <p>{price}</p>
         </Link>
+        <button
+          onClick={ () => clickBtnAddToCart(product) }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
 }
 
 ProductPreview.propTypes = {
+  clickBtnAddToCart: PropTypes.func.isRequired,
   product: PropTypes.shape({
     thumbnail: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

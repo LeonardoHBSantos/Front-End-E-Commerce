@@ -4,11 +4,13 @@ import ProductPreview from '../components/ProductPreview';
 import Categories from '../components/Categories';
 import { changeIptSearch } from '../services/ChangeFuntions';
 import { clickBtnSearch, clickBtnAddToCart } from '../services/ClickFunctions';
+import Loading from '../components/Loading';
 
 class Home extends React.Component {
   state = {
     searchInput: '',
     resultSearch: '',
+    loading: false,
   };
 
   changeIptSearch = changeIptSearch.bind(this);
@@ -18,7 +20,7 @@ class Home extends React.Component {
   clickBtnAddToCart = clickBtnAddToCart.bind(this);
 
   render() {
-    const { searchInput, resultSearch, cartSize } = this.state;
+    const { searchInput, resultSearch, loading } = this.state;
     return (
       <section>
         <input
@@ -39,20 +41,19 @@ class Home extends React.Component {
           <button>
             <Link to="/shoppingcart">Carrinho</Link>
           </button>
-          <span>{cartSize}</span>
         </div>
         <div>
-          {resultSearch !== '' && (
-            resultSearch.length === 0
-              ? (<p>Nenhum produto foi encontrado</p>)
-              : (resultSearch.map((result) => (
-                <ProductPreview
-                  clickBtnAddToCart={ this.clickBtnAddToCart }
-                  product={ result }
-                  key={ result.id }
-                />
-              )))
-          )}
+          {loading ? <Loading /> : (
+            resultSearch !== '' && (
+              resultSearch.length === 0
+                ? (<p>Nenhum produto foi encontrado</p>)
+                : (resultSearch.map((result) => (
+                  <ProductPreview
+                    clickBtnAddToCart={ this.clickBtnAddToCart }
+                    product={ result }
+                    key={ result.id }
+                  />
+                )))))}
         </div>
       </section>
     );

@@ -6,7 +6,7 @@ export async function getCategories() {
 }
 
 export async function getProductsFromCategoryAndQuery(input) {
-  const endpoint = `/api/sites/MLB/search?q=${input}`;
+  const endpoint = `/api/sites/MLB/search?${input}`;
   const response = await fetch(endpoint);
   const data = await response.json();
   return data;
