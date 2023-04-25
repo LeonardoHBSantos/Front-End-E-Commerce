@@ -1,4 +1,5 @@
 import { getProductsFromCategoryAndQuery } from './RequestFunctions';
+import { updateSizeCart } from './UpdateSizeCartFuntion';
 
 export async function clickBtnSearch({ target: { name } }) {
   this.setState({
@@ -17,6 +18,7 @@ export function clickBtnAddToCart(product) {
   arrayCart.push(product);
   const cartString = JSON.stringify(arrayCart);
   localStorage.setItem('cart', cartString);
+  updateSizeCart(this);
 }
 
 export async function clickBtnQuantity({ target }) {
@@ -35,14 +37,8 @@ export async function clickBtnQuantity({ target }) {
   });
   const productsCardString = JSON.stringify(productsCard);
   localStorage.setItem('cart', productsCardString);
-  const cartLocal = JSON.parse(localStorage.getItem('cart')) || [];
-  const cartSize = cartLocal.reduce((acc, { quantity }) => {
-    acc += quantity;
-    return acc;
-  }, 0);
-  localStorage.setItem('cartSize', cartSize);
+  updateSizeCart(this);
   this.setState({
-    cartSize,
     cart: productsCard,
   });
 }
@@ -53,14 +49,28 @@ export async function clickBtnDelete({ target }) {
   const productsCard = arrayCart.filter(({ id }) => id !== productId);
   const productsCardString = JSON.stringify(productsCard);
   localStorage.setItem('cart', productsCardString);
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const cartSize = cart.reduce((acc, { quantity }) => {
-    acc += quantity;
-    return acc;
-  }, 0);
-  localStorage.setItem('cartSize', cartSize);
+  updateSizeCart(this);
   this.setState({
-    cartSize,
     cart: productsCard,
   });
+}
+
+export async function clickBtnSubmitAvaliation(event) {
+  const { rating, text, email } = this.state;
+  event.preventDefault();
+  const validateEmailRegex = /^\S+@\S+\.\S+$/;
+  if (!rating || validateEmailRegex.test(email) === false) {
+    this.setState({
+      invalid: true,
+    });
+  } else if (rating && validateEmailRegex.test(email) === true) {
+    const { match: { params: { id } } } = this.props;
+    const ratingObj = { email, text, rating };
+    const ratingArr = JSON.parse(localStorage.getItem(id)) || [];
+    ratingArr.push(ratingObj);
+    const ratingString = JSON.stringify(ratingArr);
+    localStorage.setItem(id, ratingString);
+    this.setState({ text: '', email: '', rating: '' });
+    this.setState({ invalid: false });
+  }
 }

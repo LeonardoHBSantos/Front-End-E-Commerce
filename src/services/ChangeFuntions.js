@@ -4,3 +4,11 @@ export function changeIptSearch({ target }) {
     searchInput: value,
   });
 }
+
+export function changeIptsFormAvaliation(event) {
+  const { target } = event;
+  const { name, value } = target;
+  this.setState({
+    [name]: value,
+  });
+}
