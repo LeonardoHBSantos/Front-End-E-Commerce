@@ -5,6 +5,20 @@ export async function getCategories() {
   return data;
 }
 
+export async function getDailyOferts(categoryId) {
+  const fetch1 = await fetch(`/api/sites/MLB/search?category=${
+    categoryId || 'MLB1648'
+  }&sort=discount&deal_ids=MLB5899&offset=0&limit=50`);
+  const fetch2 = await fetch(`/api/sites/MLB/search?category=${
+    categoryId || 'MLB1648'
+  }&sort=discount&deal_ids=MLB5899&offset=51&limit=50`);
+  const req1 = await fetch1.json();
+  const req2 = await fetch2.json();
+  const results = [...req1.results, ...req2.results];
+  const filtered = results.filter((product) => product.original_price && product);
+  return filtered;
+}
+
 export async function getProductsFromQuery(query) {
   const endpoint = `/api/sites/MLB/search?q=${query}`;
   const response = await fetch(endpoint);

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import './Header.css';
@@ -5,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import Logo from './Logo';
 import { clickBtnSearch } from '../services/ClickFunctions';
 import { changeInputs } from '../services/ChangeFuntions';
-import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
 
 class Header extends Component {
   state = {
@@ -16,12 +16,9 @@ class Header extends Component {
 
   clickBtnSearch = clickBtnSearch.bind(this);
 
-  componentDidMount() {
-    updateSizeCart(this);
-  }
-
   render() {
-    const { searchInput, cartSize } = this.state;
+    const { searchInput } = this.state;
+    const { cartSize } = this.props;
     return (
       <header>
         <Link to="/">
@@ -52,5 +49,9 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  cartSize: PropTypes.number.isRequired,
+};
 
 export default withRouter(Header);
