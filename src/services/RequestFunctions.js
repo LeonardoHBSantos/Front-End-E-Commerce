@@ -5,8 +5,15 @@ export async function getCategories() {
   return data;
 }
 
-export async function getProductsFromCategoryAndQuery(input) {
-  const endpoint = `/api/sites/MLB/search?${input}`;
+export async function getProductsFromQuery(query) {
+  const endpoint = `/api/sites/MLB/search?q=${query}`;
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  return data;
+}
+
+export async function getProductsFromCategory(categoryId) {
+  const endpoint = `/api/sites/MLB/search?category=${categoryId}`;
   const response = await fetch(endpoint);
   const data = await response.json();
   return data;

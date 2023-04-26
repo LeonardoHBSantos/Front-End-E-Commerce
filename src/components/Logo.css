@@ -1,0 +1,9 @@
+.logo-div {
+  background-color: white;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.logo-div span {
+  color: #3d5a80;
+}

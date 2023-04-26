@@ -23,7 +23,7 @@ class Categories extends React.Component {
         {loading ? <Loading /> : (
           categories.map(({ id, name }) => (
             <button
-              value={ `category=${id}` }
+              value={ id }
               key={ id }
               onClick={ onClick }
             >
