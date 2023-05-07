@@ -8,7 +8,8 @@ import Header from '../components/Header';
 import searchUpdate from '../services/DidUpdateFunctions';
 import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
 import { updateDailyOferts } from '../services/DidMountFunctions';
-import ProductPreviewPromotion from '../components/ProductpreviewPromotion';
+import ProductPreviewPromotion from '../components/ProductPreviewPromotion';
+import './Home.css';
 
 class Home extends React.Component {
   state = {
@@ -70,14 +71,14 @@ class Home extends React.Component {
     return (
       <>
         <Header cartSize={ cartSize } />
-        <section>
-          <div>
+        <main>
+          <div className="categories-div">
             <Categories onClick={ this.clickBtnCategory } />
           </div>
-          <div>
+          <div className="content-div">
             {content}
           </div>
-        </section>
+        </main>
       </>
     );
   }

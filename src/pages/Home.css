@@ -1,0 +1,16 @@
+main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.categories-div {
+  max-width: 15vw;
+}
+
+.content-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 15px;
+  max-width: 80vw;
+}
