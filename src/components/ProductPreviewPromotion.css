@@ -1,27 +1,58 @@
 .product-promotion-div {
   align-items: center;
-  background-color: blue;
+  background-color: white;
+  border: 5px solid white;
+  border-radius: 10px;
+  color: rgb(41, 50, 65);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  font-size: 14px;
+  height: 420px;
   margin-bottom: 15px;
   text-align: center;
-  width: calc((80vw - 75px) / 5);
+  width: 200px;
 }
 
 
 .product-promotion-div a {
-  color: white;
+  color: rgb(41, 50, 65);
   display: flex;
   flex-direction: column;
   margin: 15px;
-  max-height: 80%;
+  margin-top: 0;
+  max-height: 330px;
   text-decoration: none;
-  width: 80%;
+  width: 100%;
+}
+
+
+.preview-image-div {
+  position: relative;
+}
+
+.preview-image-div img {
+  border-radius: 10px;
+  width: 100%;
+}
+
+.free-shipping {
+  align-items: center;
+  background-color: rgb(181, 201, 154);
+  border-radius: 20px;
+  display: flex;
+  font-size: 18px;
+  height: 30px;
+  justify-content: center;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
 }
 
 .name-product {
   height: 4.5rem;
+  margin: 5px 0;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -29,6 +60,45 @@
 }
 
 .price-div {
+  align-content: center;
   display: flex;
-  font-size: 8px;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.product-promotion-div button {
+  background-color: rgb(151, 169, 124);
+  border: none;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 7px;
+  text-align: center;
+  transition: background-color 0.2s , transform 0.2s;
+  width: 170px;
+}
+
+.product-promotion-div button:hover {
+  background-color: rgb(135, 152, 106);
+  transform: scale(1.05);
+}
+
+
+.price-div p {
+  font-size: 12px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.price-div p:nth-child( 1 ) {
+  text-decoration: line-through;
+}
+
+.price-div p:nth-child( 3 ) {
+  color: rgb(113, 131, 85);
+  font-size: 21px;
+  margin-left: 10px;
+  text-align: center;
+  width: 100%;
 }

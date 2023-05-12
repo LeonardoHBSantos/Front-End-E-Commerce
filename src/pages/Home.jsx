@@ -52,7 +52,7 @@ class Home extends React.Component {
     } else if (resultSearch !== '') {
       content = <p>Nenhum produto foi encontrado</p>;
     } else if (dailyOferts && dailyOferts.length > 0) {
-      const minNumberProducts = 25;
+      const minNumberProducts = 35;
       content = dailyOferts
         .filter((obj, index, self) => {
           return index === self.findIndex((t) => (

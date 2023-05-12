@@ -23,19 +23,24 @@ class ProductPreviewPromotion extends Component {
         <Link
           to={ `/product-details/${id}` }
         >
-          <img src={ thumbnail } alt={ title } />
-          {/* {shipping.free_shipping && <p>Frete Gratis</p>} */}
+          <div className="preview-image-div">
+            <img src={ thumbnail } alt={ title } />
+            {shipping.free_shipping && (
+              <div className="free-shipping">
+                <i className="bi bi-truck" />
+              </div>)}
+          </div>
           <p className="name-product">{title}</p>
           <div className="price-div">
             <p>
-              {`De: ${originalPrice
-                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}
-            </p>
-            <p>
-              {`Por: ${price
-                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`}
+              {originalPrice
+                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
             </p>
             <p>{`${discountPercentage}% OFF`}</p>
+            <p>
+              {price
+                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            </p>
           </div>
         </Link>
         <button

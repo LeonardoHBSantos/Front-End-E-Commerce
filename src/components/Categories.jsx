@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { updateCategories } from '../services/DidMountFunctions';
+import './Categories.css';
 
 class Categories extends React.Component {
   state = {
