@@ -6,11 +6,16 @@ import { clickBtnAddToCart, clickBtnCategory } from '../services/ClickFunctions'
 import Loading from '../components/Loading';
 import Header from '../components/Header';
 import searchUpdate from '../services/DidUpdateFunctions';
+import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
+import { updateDailyOferts } from '../services/DidMountFunctions';
+import ProductPreviewPromotion from '../components/ProductPreviewPromotion';
+import styles from './Home.module.css';
 
 class Home extends React.Component {
   state = {
+    cartSize: 0,
     resultSearch: '',
-    loading: false,
+    loading: true,
   };
 
   clickBtnCategory = clickBtnCategory.bind(this);
@@ -19,12 +24,19 @@ class Home extends React.Component {
 
   searchUpdate = searchUpdate.bind(this);
 
+  updateDailyOferts = updateDailyOferts.bind(this);
+
+  componentDidMount() {
+    updateSizeCart(this);
+    this.updateDailyOferts();
+  }
+
   componentDidUpdate(prevProps) {
     this.searchUpdate(prevProps);
   }
 
   render() {
-    const { resultSearch, loading } = this.state;
+    const { resultSearch, loading, cartSize, dailyOferts } = this.state;
     let content;
 
     if (loading) {
@@ -39,18 +51,34 @@ class Home extends React.Component {
       ));
     } else if (resultSearch !== '') {
       content = <p>Nenhum produto foi encontrado</p>;
+    } else if (dailyOferts && dailyOferts.length > 0) {
+      const minNumberProducts = 35;
+      content = dailyOferts
+        .filter((obj, index, self) => {
+          return index === self.findIndex((t) => (
+            t.id === obj.id
+          ));
+        })
+        .map((result, index) => index < minNumberProducts && (
+          <ProductPreviewPromotion
+            clickBtnAddToCart={ this.clickBtnAddToCart }
+            product={ result }
+            key={ result.id }
+          />
+        ));
     }
+
     return (
       <>
-        <Header />
-        <section>
-          <div>
+        <Header cartSize={ cartSize } />
+        <main className={ styles.main }>
+          <div className={ styles.categories_div }>
             <Categories onClick={ this.clickBtnCategory } />
           </div>
-          <div>
+          <div className={ styles.content_div }>
             {content}
           </div>
-        </section>
+        </main>
       </>
     );
   }

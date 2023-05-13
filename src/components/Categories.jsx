@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { updateCategories } from '../services/DidMountFunctions';
+import styles from './Categories.module.css';
 
 class Categories extends React.Component {
   state = {
@@ -25,6 +26,7 @@ class Categories extends React.Component {
             <button
               value={ id }
               key={ id }
+              className={ styles.button }
               onClick={ onClick }
             >
               {name}

@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import './Header.css';
 import { withRouter } from 'react-router-dom';
+import styles from './Header.module.css';
 import Logo from './Logo';
 import { clickBtnSearch } from '../services/ClickFunctions';
 import { changeInputs } from '../services/ChangeFuntions';
-import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
 
 class Header extends Component {
   state = {
@@ -16,18 +16,15 @@ class Header extends Component {
 
   clickBtnSearch = clickBtnSearch.bind(this);
 
-  componentDidMount() {
-    updateSizeCart(this);
-  }
-
   render() {
-    const { searchInput, cartSize } = this.state;
+    const { searchInput } = this.state;
+    const { cartSize } = this.props;
     return (
       <header>
         <Link to="/">
           <Logo />
         </Link>
-        <div className="search-div">
+        <div className={ styles.search_div }>
           <input
             type="text"
             value={ searchInput }
@@ -43,14 +40,18 @@ class Header extends Component {
           </button>
         </div>
         <Link to="shoppingcart">
-          <div className="cart-icon-div">
+          <div className={ styles.cart_icon_div }>
             <span>{cartSize}</span>
-            <i className="cart-icon bi bi-bag-fill" />
+            <i className={ `${styles.cart_icon} bi bi-bag-fill` } />
           </div>
         </Link>
       </header>
     );
   }
 }
+
+Header.propTypes = {
+  cartSize: PropTypes.number.isRequired,
+};
 
 export default withRouter(Header);

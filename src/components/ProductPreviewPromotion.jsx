@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './ProductPreview.module.css';
+import styles from './ProductPreviewPromotion.module.css';
 
-class ProductPreview extends Component {
+class ProductPreviewPromotion extends Component {
   render() {
     const {
       product,
@@ -16,8 +16,10 @@ class ProductPreview extends Component {
       },
       clickBtnAddToCart,
     } = this.props;
+    const originalPrice = product.original_price;
+    const discountPercentage = Math.round((1 - price / originalPrice) * 100);
     return (
-      <div className={ styles.product_div }>
+      <div className={ styles.product_promotion_div }>
         <Link
           to={ `/product-details/${id}` }
         >
@@ -30,6 +32,11 @@ class ProductPreview extends Component {
           </div>
           <p className={ styles.name_product }>{title}</p>
           <div className={ styles.price_div }>
+            <p>
+              {originalPrice
+                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            </p>
+            <p>{`${discountPercentage}% OFF`}</p>
             <p>
               {price
                 .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
@@ -46,7 +53,7 @@ class ProductPreview extends Component {
   }
 }
 
-ProductPreview.propTypes = {
+ProductPreviewPromotion.propTypes = {
   clickBtnAddToCart: PropTypes.func.isRequired,
   product: PropTypes.shape({
     thumbnail: PropTypes.string.isRequired,
@@ -57,13 +64,14 @@ ProductPreview.propTypes = {
     shipping: PropTypes.shape({
       free_shipping: PropTypes.bool.isRequired,
     }),
+    original_price: PropTypes.number.isRequired,
   }),
 };
 
-ProductPreview.defaultProps = {
+ProductPreviewPromotion.defaultProps = {
   product: PropTypes.shape({
     quantity: 1,
   }),
 };
 
-export default ProductPreview;
+export default ProductPreviewPromotion;

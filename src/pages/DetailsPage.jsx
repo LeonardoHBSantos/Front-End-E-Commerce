@@ -5,6 +5,9 @@ import { clickBtnAddToCart, clickBtnSubmitAvaliation } from '../services/ClickFu
 import { getProductObj } from '../services/DidMountFunctions';
 import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
 import { changeInputs } from '../services/ChangeFuntions';
+import styles from './DetailsPage.module.css';
+import convertImageUrl from '../services/convertImageUrl';
+import Loading from '../components/Loading';
 
 class DetailsPage extends Component {
   state = {
@@ -12,6 +15,7 @@ class DetailsPage extends Component {
     text: '',
     email: '',
     invalid: false,
+    loading: true,
   };
 
   clickBtnAddToCart = clickBtnAddToCart.bind(this);
@@ -30,118 +34,149 @@ class DetailsPage extends Component {
   render() {
     const { match: { params: { id } } } = this.props;
     const ratings = JSON.parse(localStorage.getItem(id));
-    const { productInfo, email, text, invalid, cartSize,
-      productInfo: { title, price, thumbnail, attributes, shipping } } = this.state;
-    return (
-      <div>
-        <img src={ thumbnail } alt={ title } />
-        <h2>{title}</h2>
-        <h3>{ price }</h3>
-        {shipping?.free_shipping && (
-          <p
-            data-testid="free-shipping"
-          >
-            Frete Gratis
-          </p>
-        )}
-        <ul>
-          Especificações:
-          { productInfo !== '' && attributes
-            .map((att, index) => (
-              <li
-                key={ index }
-              >
-                {`${att.name}: ${att.value_name}`}
-              </li>)) }
-        </ul>
-        <button>
-          <Link to="/shoppingcart">Carrinho</Link>
-        </button>
-        <span>{cartSize}</span>
-        <button
-          onClick={ () => this.clickBtnAddToCart(productInfo) }
-        >
-          Adicionar ao carrinho
-        </button>
-        <form>
-          <input
-            type="email"
-            name="email"
-            onChange={ this.changeIptsFormAvaliation }
-            value={ email }
-          />
-          <textarea
-            required
-            name="text"
-            cols="10"
-            rows="2"
-            onChange={ this.changeIptsFormAvaliation }
-            value={ text }
-          />
-          <label htmlFor="">
-            <input
-              type="radio"
-              name="rating"
-              value="1"
-              onChange={ this.changeIptsFormAvaliation }
+    const { productInfo, email, text, invalid, cartSize, loading,
+      productInfo: { title,
+        price,
+        thumbnail,
+        attributes,
+        shipping } } = this.state;
+    const content = () => {
+      if (loading) {
+        return <Loading />;
+      }
+      return (
+        <main className={ styles.container }>
+          <section className={ styles.image_and_date_product }>
+            <img
+              src={ convertImageUrl(thumbnail) }
+              alt={ title }
+              className={ styles.product_image }
             />
-            1
-            <input
-              type="radio"
-              name="rating"
-              value="2"
-              onChange={ this.changeIptsFormAvaliation }
-            />
-            2
-            <input
-              type="radio"
-              name="rating"
-              value="3"
-              onChange={ this.changeIptsFormAvaliation }
-            />
-            3
-            <input
-              type="radio"
-              name="rating"
-              value="4"
-              onChange={ this.changeIptsFormAvaliation }
-            />
-            4
-            <input
-              type="radio"
-              name="rating"
-              value="5"
-              onChange={ this.changeIptsFormAvaliation }
-            />
-            5
-          </label>
-          <button
-            type="submit"
-            onClick={ this.clickBtnSubmitAvaliation }
-          >
-            Enviar
-          </button>
-        </form>
-        { invalid && <p>Campos inválidos</p> }
-
-        { ratings ? ratings.map((el, index) => (
-          <div key={ index }>
-
-            <label htmlFor="">
-              Email:
-              <h3>{el.email}</h3>
-            </label>
-            <label htmlFor="">
-              Comentário:
-              <h3>{el.text}</h3>
-            </label>
-            <label htmlFor="">
-              Avaliação:
-              <h3>{el.rating}</h3>
-            </label>
+            <div className={ styles.product_info }>
+              <h2 className={ styles.title }>{title}</h2>
+              <h3 className={ styles.price }>
+                {price
+                  .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+              </h3>
+              {shipping.free_shipping && (
+                <p className={ styles.free_shipping }>Frete Grátis</p>)}
+            </div>
+          </section>
+          <section className={ styles.specifications_product }>
+            <p>Especificações:</p>
+            <table>
+              <tbody className={ styles.table_body }>
+                {productInfo !== ''
+            && attributes.map((att, index) => (
+              <tr key={ index }>
+                <td className={ styles.specification_item }>{att.name}</td>
+                <td className={ styles.specification_value }>{att.value_name}</td>
+              </tr>
+            ))}
+              </tbody>
+            </table>
+          </section>
+          <div className={ styles.buttons }>
+            <button className={ styles.cart_button }>
+              <Link to="/shoppingcart">Carrinho</Link>
+            </button>
+            <span className={ styles.cart_size }>{cartSize}</span>
+            <button
+              className={ styles.submit_button }
+              onClick={ () => this.clickBtnAddToCart(productInfo) }
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
-        )) : null }
-      </div>
+          <form className={ styles.rating_form }>
+            <input
+              type="email"
+              name="email"
+              className={ styles.email_input }
+              onChange={ this.changeIptsFormAvaliation }
+              value={ email }
+            />
+            <textarea
+              required
+              name="text"
+              className={ styles.textarea_input }
+              cols="10"
+              rows="2"
+              onChange={ this.changeIptsFormAvaliation }
+              value={ text }
+            />
+            <label htmlFor="" className={ styles.rating_label }>
+              <input
+                type="radio"
+                name="rating"
+                value="1"
+                className={ styles.rating_input }
+                onChange={ this.changeIptsFormAvaliation }
+              />
+              1
+              <input
+                type="radio"
+                name="rating"
+                value="2"
+                className={ styles.rating_input }
+                onChange={ this.changeIptsFormAvaliation }
+              />
+              2
+              <input
+                type="radio"
+                name="rating"
+                value="3"
+                className={ styles.rating_input }
+                onChange={ this.changeIptsFormAvaliation }
+              />
+              3
+              <input
+                type="radio"
+                name="rating"
+                value="4"
+                className={ styles.rating_input }
+                onChange={ this.changeIptsFormAvaliation }
+              />
+              4
+              <input
+                type="radio"
+                name="rating"
+                value="5"
+                className={ styles.rating_input }
+                onChange={ this.changeIptsFormAvaliation }
+              />
+              5
+            </label>
+            <button
+              type="submit"
+              onClick={ this.clickBtnSubmitAvaliation }
+            >
+              Enviar
+            </button>
+          </form>
+          { invalid && <p>Campos inválidos</p> }
+          { ratings ? ratings.map((el, index) => (
+            <div key={ index }>
+
+              <label htmlFor="">
+                Email:
+                <h3>{el.email}</h3>
+              </label>
+              <label htmlFor="">
+                Comentário:
+                <h3>{el.text}</h3>
+              </label>
+              <label htmlFor="">
+                Avaliação:
+                <h3>{el.rating}</h3>
+              </label>
+            </div>
+          )) : null }
+        </main>
+      );
+    };
+    return (
+      content()
     );
   }
 }
