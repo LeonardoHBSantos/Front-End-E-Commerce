@@ -5,6 +5,7 @@ export async function getProductObj() {
   const product = await getProductById(id);
   this.setState({
     productInfo: product,
+    loading: false,
   });
 }
 

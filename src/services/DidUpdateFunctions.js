@@ -8,7 +8,7 @@ function searchUpdate(prevProps) {
     .get('searchInput');
   if (currentSearchInput !== prevSearchInput) {
     this.setState({ loading: true }, async () => {
-      const { results } = await getProductsFromQuery(currentSearchInput);
+      const results = await getProductsFromQuery(currentSearchInput);
       this.setState({
         resultSearch: results,
         loading: false,

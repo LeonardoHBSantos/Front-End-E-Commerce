@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './ProductPreviewPromotion.css';
+import styles from './ProductPreviewPromotion.module.css';
 
 class ProductPreviewPromotion extends Component {
   render() {
@@ -19,19 +19,19 @@ class ProductPreviewPromotion extends Component {
     const originalPrice = product.original_price;
     const discountPercentage = Math.round((1 - price / originalPrice) * 100);
     return (
-      <div className="product-promotion-div">
+      <div className={ styles.product_promotion_div }>
         <Link
           to={ `/product-details/${id}` }
         >
-          <div className="preview-image-div">
+          <div className={ styles.preview_image_div }>
             <img src={ thumbnail } alt={ title } />
             {shipping.free_shipping && (
-              <div className="free-shipping">
+              <div className={ styles.free_shipping }>
                 <i className="bi bi-truck" />
               </div>)}
           </div>
-          <p className="name-product">{title}</p>
-          <div className="price-div">
+          <p className={ styles.name_product }>{title}</p>
+          <div className={ styles.price_div }>
             <p>
               {originalPrice
                 .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}

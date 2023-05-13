@@ -1,3 +1,5 @@
+import convertImageUrl from './convertImageUrl';
+
 export async function getCategories() {
   const endpoint = '/api/sites/MLB/categories';
   const response = await fetch(endpoint);
@@ -7,11 +9,6 @@ export async function getCategories() {
 
 export async function getDailyOferts(categoryId) {
   try {
-    const convertImageUrl = (url) => {
-      const modifiedUrl = url.replace(/-I(\.[^.]+)$/, '-W$1');
-      return modifiedUrl;
-    };
-
     const fetch1 = await fetch(`/api/sites/MLB/search?category=${
       categoryId || 'MLB1648'
     }&sort=discount&deal_ids=MLB5899&offset=0&limit=50`);
@@ -30,7 +27,6 @@ export async function getDailyOferts(categoryId) {
       product.thumbnail = convertImageUrl(product.thumbnail);
       return product;
     });
-    console.log(finalResult.length);
     return finalResult;
   } catch (error) {
     console.log(error.message);
@@ -40,15 +36,23 @@ export async function getDailyOferts(categoryId) {
 export async function getProductsFromQuery(query) {
   const endpoint = `/api/sites/MLB/search?q=${query}`;
   const response = await fetch(endpoint);
-  const data = await response.json();
-  return data;
+  const { results } = await response.json();
+  const finalResult = results.map((product) => {
+    product.thumbnail = convertImageUrl(product.thumbnail);
+    return product;
+  });
+  return finalResult;
 }
 
 export async function getProductsFromCategory(categoryId) {
   const endpoint = `/api/sites/MLB/search?category=${categoryId}`;
   const response = await fetch(endpoint);
-  const data = await response.json();
-  return data;
+  const { results } = await response.json();
+  const finalResult = results.map((product) => {
+    product.thumbnail = convertImageUrl(product.thumbnail);
+    return product;
+  });
+  return finalResult;
 }
 
 export async function getProductById(id) {

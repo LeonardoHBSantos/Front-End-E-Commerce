@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import styles from './ProductPreview.module.css';
 
 class ProductPreview extends Component {
   render() {
@@ -16,14 +17,24 @@ class ProductPreview extends Component {
       clickBtnAddToCart,
     } = this.props;
     return (
-      <div>
+      <div className={ styles.product_div }>
         <Link
           to={ `/product-details/${id}` }
         >
-          <img src={ thumbnail } alt={ title } />
-          {shipping.free_shipping && <p>Frete Gratis</p>}
-          <p>{title}</p>
-          <p>{price}</p>
+          <div className={ styles.preview_image_div }>
+            <img src={ thumbnail } alt={ title } />
+            {shipping.free_shipping && (
+              <div className={ styles.free_shipping }>
+                <i className="bi bi-truck" />
+              </div>)}
+          </div>
+          <p className={ styles.name_product }>{title}</p>
+          <div className={ styles.price_div }>
+            <p>
+              {price
+                .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            </p>
+          </div>
         </Link>
         <button
           onClick={ () => clickBtnAddToCart(product) }

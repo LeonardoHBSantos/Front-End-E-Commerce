@@ -11,7 +11,7 @@ export async function clickBtnCategory({ target: { value } }) {
   this.setState({
     loading: true,
   });
-  const { results } = await getProductsFromCategory(value);
+  const results = await getProductsFromCategory(value);
   this.setState({
     resultSearch: [...results],
     loading: false,

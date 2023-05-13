@@ -1,11 +1,11 @@
 import { Component } from 'react';
-import './Loading.css';
+import styles from './Loading.module.css';
 
 class Loading extends Component {
   render() {
     return (
-      <div className="loading">
-        <div className="lds-ellipsis">
+      <div className={ styles.loading }>
+        <div className={ styles.lds_ellipsis }>
           <div />
           <div />
           <div />

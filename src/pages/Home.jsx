@@ -9,7 +9,7 @@ import searchUpdate from '../services/DidUpdateFunctions';
 import { updateSizeCart } from '../services/UpdateSizeCartFuntion';
 import { updateDailyOferts } from '../services/DidMountFunctions';
 import ProductPreviewPromotion from '../components/ProductPreviewPromotion';
-import './Home.css';
+import styles from './Home.module.css';
 
 class Home extends React.Component {
   state = {
@@ -71,11 +71,11 @@ class Home extends React.Component {
     return (
       <>
         <Header cartSize={ cartSize } />
-        <main>
-          <div className="categories-div">
+        <main className={ styles.main }>
+          <div className={ styles.categories_div }>
             <Categories onClick={ this.clickBtnCategory } />
           </div>
-          <div className="content-div">
+          <div className={ styles.content_div }>
             {content}
           </div>
         </main>

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import './Header.css';
 import { withRouter } from 'react-router-dom';
+import styles from './Header.module.css';
 import Logo from './Logo';
 import { clickBtnSearch } from '../services/ClickFunctions';
 import { changeInputs } from '../services/ChangeFuntions';
@@ -24,7 +24,7 @@ class Header extends Component {
         <Link to="/">
           <Logo />
         </Link>
-        <div className="search-div">
+        <div className={ styles.search_div }>
           <input
             type="text"
             value={ searchInput }
@@ -40,9 +40,9 @@ class Header extends Component {
           </button>
         </div>
         <Link to="shoppingcart">
-          <div className="cart-icon-div">
+          <div className={ styles.cart_icon_div }>
             <span>{cartSize}</span>
-            <i className="cart-icon bi bi-bag-fill" />
+            <i className={ `${styles.cart_icon} bi bi-bag-fill` } />
           </div>
         </Link>
       </header>
