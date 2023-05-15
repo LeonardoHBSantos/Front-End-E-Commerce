@@ -1,0 +1,28 @@
+.button {
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  color: rgb(41, 50, 65);
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding: 8px 16px;
+  text-align: center;
+  transition: background-color 0.2s , color 0.2s , transform 0.2s;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: rgba(61, 90, 128, 1);
+  color: white;
+  transform: scale(1.05);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:active {
+  transform: translateY(1px);
+}

@@ -1,21 +1,14 @@
-import { getProductsFromCategory } from './RequestFunctions';
 import { updateSizeCart } from './UpdateSizeCartFuntion';
 
 export async function clickBtnSearch() {
   const { history } = this.props;
   const { searchInput } = this.state;
-  history.push(`/?searchInput=${searchInput}`);
+  history.push(`/search/query=${searchInput}`);
 }
 
 export async function clickBtnCategory({ target: { value } }) {
-  this.setState({
-    loading: true,
-  });
-  const results = await getProductsFromCategory(value);
-  this.setState({
-    resultSearch: [...results],
-    loading: false,
-  });
+  const { history } = this.props;
+  history.push(`/search/category=${value}`);
 }
 
 export function clickBtnAddToCart(product) {

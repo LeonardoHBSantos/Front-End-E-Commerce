@@ -31,6 +31,7 @@ class Header extends Component {
             placeholder="O Que Você Deseja Hoje?"
             name="searchInput"
             onChange={ this.changeIptSearch }
+            onKeyDown={ (event) => event.key === 'Enter' && this.clickBtnSearch() }
           />
           <button
             type="button"
@@ -39,7 +40,7 @@ class Header extends Component {
             <i className="bi bi-search" />
           </button>
         </div>
-        <Link to="shoppingcart">
+        <Link to="/shoppingcart">
           <div className={ styles.cart_icon_div }>
             <span>{cartSize}</span>
             <i className={ `${styles.cart_icon} bi bi-bag-fill` } />

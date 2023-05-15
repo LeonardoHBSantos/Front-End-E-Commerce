@@ -67,12 +67,17 @@ class DetailsPage extends Component {
             <table>
               <tbody className={ styles.table_body }>
                 {productInfo !== ''
-            && attributes.map((att, index) => (
-              <tr key={ index }>
-                <td className={ styles.specification_item }>{att.name}</td>
-                <td className={ styles.specification_value }>{att.value_name}</td>
-              </tr>
-            ))}
+            && attributes.map((att, index) => {
+              if (att.value_name) {
+                return (
+                  <tr key={ index }>
+                    <td className={ styles.specification_item }>{att.name}</td>
+                    <td className={ styles.specification_value }>{att.value_name}</td>
+                  </tr>
+                );
+              }
+              return null;
+            })}
               </tbody>
             </table>
           </section>
