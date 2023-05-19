@@ -1,4 +1,5 @@
 import { updateSizeCart } from './UpdateSizeCartFuntion';
+import { alertInvalidInputs } from './alertFunctions';
 
 export async function clickBtnSearch() {
   const { history } = this.props;
@@ -54,18 +55,16 @@ export async function clickBtnDelete({ target }) {
   });
 }
 
-export async function clickBtnSubmitAvaliation(event) {
+export async function clickBtnSubmitAvaliation(id) {
   const { rating, text, email } = this.state;
-  event.preventDefault();
   const validateEmailRegex = /^\S+@\S+\.\S+$/;
-  if (!rating || validateEmailRegex.test(email) === false) {
-    this.setState({
-      invalid: true,
-    });
-  } else if (rating && validateEmailRegex.test(email) === true) {
-    const { match: { params: { id } } } = this.props;
-    const ratingObj = { email, text, rating };
+  const minCaracters = 15;
+  if (!rating || !validateEmailRegex.test(email) || text.length <= minCaracters) {
+    alertInvalidInputs();
+  } else {
     const ratingArr = JSON.parse(localStorage.getItem(id)) || [];
+    const idComment = ratingArr.length;
+    const ratingObj = { email, text, rating, idComment };
     ratingArr.push(ratingObj);
     const ratingString = JSON.stringify(ratingArr);
     localStorage.setItem(id, ratingString);
@@ -86,4 +85,22 @@ export function clickBtnSubmitCheckout(event) {
   } else {
     this.history.push('/');
   }
+}
+
+export function clickRatingButtons(rating) {
+  this.setState({
+    rating: Number(rating),
+  });
+}
+
+export function removeComment(idProduct, idComment) {
+  const ratingArr = JSON.parse(localStorage.getItem(idProduct)) || [];
+  const newRatingArr = ratingArr.filter((comment) => comment.idComment !== idComment);
+  const ratingString = JSON.stringify(newRatingArr);
+  localStorage.setItem(idProduct, ratingString);
+  this.setState({
+    text: '',
+    email: '',
+    rating: 0,
+  });
 }
