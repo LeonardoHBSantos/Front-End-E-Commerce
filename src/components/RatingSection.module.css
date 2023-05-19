@@ -1,0 +1,158 @@
+.ratings_product {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: center;
+  width: 100%;
+}
+
+.rating_form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 50px;
+  width: 100%;
+}
+
+.rating_form h2 {
+  color: #293241;
+  font-size: 36px;
+}
+
+.email_and_description_form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.email_input, .textarea_input {
+  background-color: #f7f7f7;
+  border: 3px solid rgba(61, 90, 128, 1);
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 15px;
+  padding: 10px;
+  width: 60%;
+}
+
+.textarea_input {
+  height: 150px;
+  width: 60%;
+}
+
+.email_input:focus, .textarea_input:focus {
+  outline: none;
+}
+
+
+.star {
+  color: rgba(61, 90, 128, 1);
+  font-size: 35px;
+}
+
+.full_star {
+  color: rgba(61, 90, 128, 1);
+  font-size: 35px;
+}
+
+.button_rating {
+  background: none;
+  border: none;
+  height: min-content;
+  margin: 5px;
+  width: min-content;
+}
+
+
+.submit_rating_button {
+  background-color: rgba(61, 90, 128, 0.8);
+  border: none;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  height: 45px;
+  padding: 7px;
+  text-align: center;
+  transition: background-color 0.2s , transform 0.2s;
+  width: 250px;
+}
+
+.submit_rating_button:hover {
+  background-color: rgba(61, 90, 128, 1);
+  transform: scale(1.05);
+}
+
+.ratings_section {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 50px;
+  width: 80%;
+}
+
+.ratings_section h2 {
+  color: #293241;
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.rating_comment {
+  align-items: start;
+  border: 3px solid #293241;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  height: min-content;
+  justify-content: center;
+  margin: 25px;
+  padding: 15px;
+  position: relative;
+  width: 45%;
+}
+
+.button_remove_comment {
+  background: none;
+  border: none;
+  font-size: 20px;
+  height: min-content;
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: min-content;
+}
+
+.comment {
+  color: #293241;
+  font-size: 30px;
+  margin: 0;
+}
+
+.email {
+  color: #293241;
+  font-size: 12px;
+  margin: 0;
+}
+
+.star_comment {
+  color: #293241;
+  font-size: 15px;
+}
+
+.full_star_comment {
+  color: #293241;
+  font-size: 15px;
+}
+
+.not_comment {
+  color: #293241;
+  font-size: 20px;
+  margin: 15px;
+}

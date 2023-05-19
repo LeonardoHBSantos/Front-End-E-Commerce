@@ -1,0 +1,100 @@
+.product_div {
+  align-items: center;
+  background-color: white;
+  border: 5px solid white;
+  border-radius: 10px;
+  color: rgb(41, 50, 65);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  font-size: 14px;
+  height: 375px;
+  margin-bottom: 15px;
+  text-align: center;
+  width: 200px;
+}
+
+
+.product_div a {
+  color: rgb(41, 50, 65);
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  margin-top: 0;
+  max-height: 330px;
+  text-decoration: none;
+  width: 100%;
+}
+
+
+.preview_image_div {
+  position: relative;
+}
+
+.preview_image_div img {
+  border-radius: 10px;
+  width: 100%;
+}
+
+.free_shipping {
+  align-items: center;
+  background-color: rgb(181, 201, 154);
+  border-radius: 20px;
+  display: flex;
+  font-size: 18px;
+  height: 30px;
+  justify-content: center;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+}
+
+.name_product {
+  height: 40px;
+  margin: 5px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.price_div {
+  align-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.product_div button {
+  background-color: rgba(61, 90, 128, 0.8);
+  border: none;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 7px;
+  text-align: center;
+  transition: background-color 0.2s , transform 0.2s;
+  width: 170px;
+}
+
+.product_div button:hover {
+  background-color: rgba(61, 90, 128, 1);
+  transform: scale(1.05);
+}
+
+
+.price_div p {
+  font-size: 12px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.price_div p:last-child {
+  color: rgb(113, 131, 85);
+  font-size: 21px;
+  margin-left: 10px;
+  text-align: center;
+  width: 100%;
+}

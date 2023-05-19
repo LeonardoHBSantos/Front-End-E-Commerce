@@ -1,20 +1,23 @@
-import { getProductsFromQuery } from './RequestFunctions';
+import { getProductsFromCategory, getProductsFromQuery } from './RequestFunctions';
 
-function searchUpdate(prevProps) {
-  const { location: { search } } = this.props;
-  const currentSearchInput = new URLSearchParams(search)
-    .get('searchInput');
-  const prevSearchInput = new URLSearchParams(prevProps.location.search)
-    .get('searchInput');
-  if (currentSearchInput !== prevSearchInput) {
-    this.setState({ loading: true }, async () => {
-      const results = await getProductsFromQuery(currentSearchInput);
-      this.setState({
-        resultSearch: results,
-        loading: false,
-      });
-    });
+async function searchUpdate() {
+  let { match: { params: { search } } } = this.props;
+  this.setState({
+    loading: true,
+  });
+  let results;
+  if (search.includes('category')) {
+    search = search.replace('category=', '');
+    results = await getProductsFromCategory(search);
+  } else if (search.includes('query')) {
+    search = search.replace('query=', '');
+    results = await getProductsFromQuery(search);
   }
+  this.setState({
+    prevSearch: search,
+    resultSearch: [...results],
+    loading: false,
+  });
 }
 
 export default searchUpdate;
