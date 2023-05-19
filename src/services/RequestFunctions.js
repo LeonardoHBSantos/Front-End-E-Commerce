@@ -1,7 +1,7 @@
 import convertImageUrl from './convertImageUrl';
 
 export async function getCategories() {
-  const endpoint = '/api/sites/MLB/categories';
+  const endpoint = 'https://api.mercadolibre.com/sites/MLB/categories';
   const response = await fetch(endpoint);
   const data = await response.json();
   return data;
@@ -9,13 +9,13 @@ export async function getCategories() {
 
 export async function getDailyOferts(categoryId) {
   try {
-    const fetch1 = await fetch(`/api/sites/MLB/search?category=${
+    const fetch1 = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${
       categoryId || 'MLB1648'
     }&sort=discount&deal_ids=MLB5899&offset=0&limit=50`);
-    const fetch2 = await fetch(`/api/sites/MLB/search?category=${
+    const fetch2 = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${
       categoryId || 'MLB1648'
     }&sort=discount&deal_ids=MLB5899&offset=51&limit=50`);
-    const fetch3 = await fetch(`/api/sites/MLB/search?category=${
+    const fetch3 = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${
       categoryId || 'MLB1648'
     }&sort=discount&deal_ids=MLB5899&offset=101&limit=50`);
     const req1 = await fetch1.json();
@@ -34,7 +34,7 @@ export async function getDailyOferts(categoryId) {
 }
 
 export async function getProductsFromQuery(query) {
-  const endpoint = `/api/sites/MLB/search?q=${query}`;
+  const endpoint = `https://api.mercadolibre.com/sites/MLB/search?q=${query}`;
   const response = await fetch(endpoint);
   const { results } = await response.json();
   const finalResult = results.map((product) => {
@@ -45,7 +45,7 @@ export async function getProductsFromQuery(query) {
 }
 
 export async function getProductsFromCategory(categoryId) {
-  const endpoint = `/api/sites/MLB/search?category=${categoryId}`;
+  const endpoint = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`;
   const response = await fetch(endpoint);
   const { results } = await response.json();
   const finalResult = results.map((product) => {
@@ -56,7 +56,7 @@ export async function getProductsFromCategory(categoryId) {
 }
 
 export async function getProductById(id) {
-  const endpoint = `/api/items/${id}`;
+  const endpoint = `https://api.mercadolibre.com/items/${id}`;
   const response = await fetch(endpoint);
   const data = await response.json();
   return data;
