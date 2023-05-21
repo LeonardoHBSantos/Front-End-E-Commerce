@@ -1,4 +1,5 @@
 import { updateSizeCart } from './UpdateSizeCartFuntion';
+import { updateTotalCart } from './UpdateTotalCartFunction';
 import { alertInvalidInputs } from './alertFunctions';
 
 export async function clickBtnSearch() {
@@ -22,11 +23,10 @@ export function clickBtnAddToCart(product) {
 }
 
 export async function clickBtnQuantity({ target }) {
-  const productId = target.parentNode.id;
-  const { name } = target;
+  const { name, id } = target;
   const { cart } = this.state;
   const productsCard = cart.map((product) => {
-    if (product.id === productId) {
+    if (product.id === id) {
       if (name === 'increaseButton') {
         product.quantity += 1;
       } else {
@@ -38,6 +38,7 @@ export async function clickBtnQuantity({ target }) {
   const productsCardString = JSON.stringify(productsCard);
   localStorage.setItem('cart', productsCardString);
   updateSizeCart(this);
+  updateTotalCart(this);
   this.setState({
     cart: productsCard,
   });
@@ -45,11 +46,12 @@ export async function clickBtnQuantity({ target }) {
 
 export async function clickBtnDelete({ target }) {
   const arrayCart = JSON.parse(localStorage.getItem('cart'));
-  const productId = target.parentNode.id;
+  const productId = target.id;
   const productsCard = arrayCart.filter(({ id }) => id !== productId);
   const productsCardString = JSON.stringify(productsCard);
   localStorage.setItem('cart', productsCardString);
   updateSizeCart(this);
+  updateTotalCart(this);
   this.setState({
     cart: productsCard,
   });
@@ -102,5 +104,14 @@ export function removeComment(idProduct, idComment) {
     text: '',
     email: '',
     rating: 0,
+  });
+}
+
+export function clickCheckoutButton() {
+  const { history } = this.props;
+  const { cart } = this.state;
+  history.push({
+    pathname: '/checkout',
+    state: { cart },
   });
 }

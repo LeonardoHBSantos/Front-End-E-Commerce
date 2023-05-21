@@ -33,12 +33,11 @@ class RatingSection extends Component {
           { ratings && ratings.length > 0 ? ratings.map((el, index) => (
             <div key={ index } className={ styles.rating_comment }>
               <button
-                className={ styles.button_remove_comment }
+                aria-label="delete"
+                className={ `bi bi-trash ${styles.button_remove_comment}` }
                 type="button"
                 onClick={ () => this.removeComment(id, el.idComment) }
-              >
-                <i className="bi bi-trash" />
-              </button>
+              />
 
               <div className={ styles.rating_stars_comment }>
                 {ratingsNumbers.map((number) => (Number(number) <= Number(el.rating)
