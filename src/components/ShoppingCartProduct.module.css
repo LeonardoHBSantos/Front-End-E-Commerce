@@ -1,0 +1,93 @@
+.product_div {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  height: 100px;
+  justify-content: space-evenly;
+  margin: 15px;
+  width: 95%;
+}
+
+.image {
+  border-radius: 10px;
+  height: 100%;
+  margin: 10px;
+}
+
+.product {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin: 15px;
+  width: 100%;
+}
+
+.name {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: start;
+  margin: 10px;
+  text-align: center;
+}
+
+
+.price_quantity_and_delete {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  width: 275px;
+}
+
+.quantity {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  width: 100px;
+}
+
+.quantity_button {
+  border: 2px solid rgba(41, 50, 65, 1);
+  border-radius: 8px;
+  color: rgba(41, 50, 65, 1);
+  cursor: pointer;
+  height: 30px;
+  transition: background-color 0.2s , color 0.2s , transform 0.2s;
+  width: 30px;
+}
+
+.quantity_button:hover {
+  background-color: rgba(41, 50, 65, 1);
+  color: white;
+  transform: scale(1.05);
+}
+
+.quantity_button:disabled {
+  background-color: white;
+  border: 2px solid rgba(41, 50, 65, 0.5);
+  color: rgba(41, 50, 65, 0.5);
+  cursor: not-allowed;
+  transform: scale(1);
+}
+
+.delete_button {
+  background-color: #dc3545;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: background-color 0.2s , transform 0.2s;
+}
+
+.delete_button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}

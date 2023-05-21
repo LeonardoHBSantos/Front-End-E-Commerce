@@ -35,10 +35,10 @@ class Header extends Component {
           />
           <button
             type="button"
+            aria-label="search"
+            className="bi bi-search"
             onClick={ this.clickBtnSearch }
-          >
-            <i className="bi bi-search" />
-          </button>
+          />
         </div>
         <Link to="/shoppingcart">
           <div className={ styles.cart_icon_div }>
